@@ -1,6 +1,22 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer style{
+  .my-styles {
+    display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  flex: 1;
+  }
+.new-style:hover{
+  border: radius 10px;
+  background-color: #eff2f5;
+}
+
+}
+
 *{
   margin: 0;
 }

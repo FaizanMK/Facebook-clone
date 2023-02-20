@@ -29,7 +29,7 @@ function Header() {
           <AiOutlineSearch />
 
           <input
-            className=" border bg-transparent outline-0"
+            className="  bg-transparent outline-0 "
             type="text"
             placeholder="Search Facebook"
           />

@@ -3,10 +3,12 @@ import React, { useState } from "react";
 import VideocamIcon from "@mui/icons-material/Videocam";
 import PhotoLibraryIcon from "@mui/icons-material/PhotoLibrary";
 import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon";
+import { useStateValue } from "./StateProvider";
 
 function MessageSender() {
   const [input, setInput] = useState("");
   const [imageUrl, setImageUrl] = useState("");
+  const [{ user }, dispatch] = useStateValue();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,13 +22,13 @@ function MessageSender() {
     <div className="flex bg-white flex-col mt-7 rounded-2xl w-full shadow-my">
       {/* message sender top */}
       <div className="flex border-solid border-b border-white p-4">
-        <Avatar />
+        <Avatar src={user.photoURL} />
         <form className="flex-1 flex">
           <input
             value={input}
             onChange={(e) => setInput(e.target.value)}
             type="text"
-            placeholder="What's on your mind?"
+            placeholder={`What's on your mind? ${user.displayName} `}
             className="outline-0 border-none py-1 px-5 my-0 mx-2 rounded-nn bg-slate-200 flex-1"
           />
           <input

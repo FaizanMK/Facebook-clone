@@ -8,14 +8,14 @@ import {
 } from "react-icons/md";
 import SidebarRow from "./SidebarRow";
 import { FaFlag, FaUserFriends } from "react-icons/fa";
+import { useStateValue } from "./StateProvider";
 
 function Sidebar() {
+  const [{ user }, dispatch] = useStateValue();
+
   return (
     <div className="py-6 px-2">
-      <SidebarRow
-        src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8aHVtYW58ZW58MHx8MHx8&w=1000&q=80"
-        title="Babar Azam"
-      />
+      <SidebarRow src={user.photoURL} title={user.displayName} />
 
       <SidebarRow Icon={MdLocalHospital} title="COVID 19 Information Center" />
 

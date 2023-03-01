@@ -16,8 +16,10 @@ function Post({ profielPic, image, username, timestamp, message }) {
         {/* post top info */}
         <div>
           <h3 className="font-medium">{username}</h3>
-          <p className="font-light text-gray-500">Timestamp...</p>
-          {/* <p>{new Date(timestamp?.toDate()).toUTCString()}</p> */}
+          <p className="font-light text-gray-500">
+            {/* {new Date(timestamp?.toDate()).toUTCString()} */}
+          </p>
+          <p>{new Date(timestamp?.toDate()).toUTCString()}</p>
         </div>
       </div>
       {/* post bottom */}

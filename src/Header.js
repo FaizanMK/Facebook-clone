@@ -12,9 +12,12 @@ import {
 
 import { IoAdd } from "react-icons/io5";
 import { Avatar } from "@mui/material";
+import { useStateValue } from "./StateProvider";
 // "0px 5px 8px -9 red rgba(0,0,0,0.75)",
 
 function Header() {
+  const [{ user }, dispatch] = useStateValue();
+
   return (
     //header
     <div className="flex py-4 px-5 justify-between sticky bg-white z-100 top-0 shadow-custom">
@@ -71,8 +74,8 @@ function Header() {
       {/* header right */}
       <div className="flex text-2xl">
         <div className="flex justify-center">
-          <Avatar />
-          <h4 className="ml-2">Faizan MK</h4>
+          <Avatar src={user.photoURL} />
+          <h4 className="ml-2">{user.displayName}</h4>
         </div>
         <div>
           <IoAdd />

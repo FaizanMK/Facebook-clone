@@ -4,14 +4,41 @@ import VideocamIcon from "@mui/icons-material/Videocam";
 import PhotoLibraryIcon from "@mui/icons-material/PhotoLibrary";
 import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon";
 import { useStateValue } from "./StateProvider";
+import { collection, addDoc } from "firebase/firestore";
+import db from "./firebase";
+import { serverTimestamp } from "firebase/firestore";
+
+//reference to the collection
 
 function MessageSender() {
   const [input, setInput] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [{ user }, dispatch] = useStateValue();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("message: ", input);
+    console.log("message: ", imageUrl);
+
+    // Add a new document with a generated id.
+    const docRef = await addDoc(collection(db, "posts"), {
+      // message: input,
+      // image: imageUrl,
+      message: input,
+      timestamp: serverTimestamp(),
+      profilePic: user.photoURL,
+      username: user.displayName,
+      image: imageUrl,
+    });
+
+    // add data to firestore
+    // const data = {
+    //   message: input,
+    //   timestamp: firestore.FieldValue.serverTimestamp(),
+    //   profilePic: user.photoURL,
+    //   username: user.displayName,
+    //   image: imageUrl,
+    // };
 
     // some clever darabasse stuff
     setInput("");

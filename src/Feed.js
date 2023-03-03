@@ -3,19 +3,41 @@ import MessageSender from "./MessageSender";
 import Post from "./Post";
 import StoryReel from "./StoryReel";
 import db from "./firebase";
-import { collection, doc, getDocs } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDocs,
+  query,
+  orderBy,
+  onSnapshot,
+} from "firebase/firestore";
 
 // reference to the firestore
-const postsRef = collection(db, "posts");
+// const postsRef = collection(db, "posts");
+
+// reference to the firestore and ordering data in descending order
+const postsRef = query(collection(db, "posts"), orderBy("timestamp", "desc"));
 
 function Feed() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
+    // const q = query(postsRef, orderBy("timestamp", "desc"));
+    // onSnapshot(query(postsRef, orderBy("timestamp", "desc")), (snapshot) => {
+    //   setPosts(
+    //     snapshot.docs.map((doc) => {
+    //       console.log("ordered snapshot", doc.data());
+    //       return doc.data();
+    //     })
+    //   );
+    // });
+
     getDocs(postsRef)
       .then((querySnapshot) => {
         setPosts(
           querySnapshot.docs.map((doc) => ({
+            // we are retrieveing id so that each document can be uniquley identified with that id
+            // and further this is is passsed as key key={post.data.id} so it uniquely identifies our posts here
             id: doc.id,
             data: doc.data(),
           }))
@@ -63,7 +85,7 @@ function Feed() {
         username="faizan khan"
         image="https://startuppakistan.com.pk/wp-content/uploads/2023/01/babar-azam-moves-up-in-latest-t20i-rankings-1668611688-6470.jpeg"
       /> */}
-      <Post message="i am hard coded" />
+      {/* <Post message="i am hard coded" /> */}
     </div>
   );
 }

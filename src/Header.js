@@ -20,7 +20,7 @@ function Header() {
 
   return (
     //header
-    <div className="flex py-4 px-5 justify-between sticky bg-white z-100 top-0 shadow-custom">
+    <div className="flex py-4 px-5 justify-between sticky bg-white z-100 top-0 shadow-custom ">
       {/* header left */}
       <div className="flex justify-evenly">
         <img
